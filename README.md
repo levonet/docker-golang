@@ -2,7 +2,7 @@
 
 - [`go2go-*`, `go2go`, `latest` (*Dockerfile*)](https://github.com/levonet/docker-golang/blob/master/Dockerfile)
 
-# Docker Image of Golang `dev.go2go` branch
+# Docker Image with Go2 from `dev.go2go` branch
 
 <img src="https://raw.githubusercontent.com/docker-library/docs/01c12653951b2fe592c1f93a13b4e289ada0e3a1/golang/logo.png" align="right"/>
 
@@ -77,13 +77,13 @@ $ docker run -it --rm --name my-running-app my-golang-app
 There may be occasions where it is not appropriate to run your app inside a container. To compile, but not run your app inside the Docker instance, you can write something like:
 
 ```console
-$ docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp levonet/golang:go2go go build -v
+$ docker run --rm -v "$PWD":/go/src/myapp -w /go/src/myapp levonet/golang:go2go go build -v
 ```
 
 Or compile `.go2` source files:
 
 ```console
-$ docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp levonet/golang:go2go go tool go2go build
+$ docker run --rm -v "$PWD":/go/src/myapp -w /go/src/myapp levonet/golang:go2go go tool go2go build
 ```
 
 # Image Variants
