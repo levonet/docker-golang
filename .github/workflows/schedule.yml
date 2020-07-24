@@ -1,0 +1,17 @@
+---
+name: Schedule CI
+on:
+  schedule:
+  - cron: "45 3 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Docker Hub hook
+      env:
+        DOCKER_SOURCE: ${{ secrets.DOCKER_SOURCE }}
+        DOCKER_TRIGGER: ${{ secrets.DOCKER_TRIGGER }}
+      run: curl -s -X POST https://hub.docker.com/api/build/v1/source/${DOCKER_SOURCE}/trigger/${DOCKER_TRIGGER}/call/
