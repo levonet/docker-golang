@@ -77,6 +77,7 @@ COPY --from=build /usr/local/lib/go /usr/local/lib/go
 RUN set -eux \
     && apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p "${GOPATH}/src" "${GOPATH}/bin" \
     && chmod -R 777 "${GOPATH}" \
     && ln -s /usr/local/lib/go/bin/go /usr/bin/ \
