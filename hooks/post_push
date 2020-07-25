@@ -6,8 +6,8 @@ for tag in $(echo $DOCKER_TAG | tr "," "\n"); do
     if [[ "${tag}" =~ ^go2go ]]; then
         new_tag=$(echo ${tag} | sed -e "s/^go2go/go2go-$(date +%Y%m%d)/")
         new_image_name="${DOCKER_REPO}:${new_tag}"
-        echo docker tag "${IMAGE_NAME}" "${new_image_name}"
-        echo docker push "${new_image_name}"
+        docker tag "${IMAGE_NAME}" "${new_image_name}"
+        docker push "${new_image_name}"
     fi
 done
 
