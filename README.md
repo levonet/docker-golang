@@ -1,6 +1,7 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`go2go-*`, `go2go`, `latest` (*Dockerfile*)](https://github.com/levonet/docker-golang/blob/master/Dockerfile)
+- [`go2go-*`, `go2go-*-buster`, `go2go-buster`,`go2go`, `latest` (*Dockerfile*)](https://github.com/levonet/docker-golang/blob/master/buster/Dockerfile)
+- [`go2go-*-alpine`, `go2go-alpine`, `alpine` (*Dockerfile*)](https://github.com/levonet/docker-golang/blob/master/alpine/Dockerfile)
 
 # Docker Image with Go2 from `dev.go2go` branch
 
@@ -88,7 +89,16 @@ $ docker run --rm -v "$PWD":/go/src/myapp -w /go/src/myapp levonet/golang:go2go 
 
 # Image Variants
 
+The `levonet/golang` images come in many flavors, each designed for a specific use case.
+
 ## `levonet/golang:<version>`
+
+This is the defacto image. If you are unsure about what your needs are, you probably want to use this one.
+It is designed to be used both as a throw away container (mount your source code and start the container to start your app), as well as the base to build other images off of.
+
+Some of these tags may have names like buster in them. These are the suite code names for releases of [Debian](https://wiki.debian.org/DebianReleases) and indicate which release the image is based on. If your image needs to install any additional packages beyond what comes with the image, you'll likely want to specify one of these explicitly to minimize breakage when there are new releases of Debian.
+
+## `levonet/golang:<version>-alpine`
 
 This image is based on the popular [Alpine Linux project](https://alpinelinux.org), available in [the `alpine` official image](https://hub.docker.com/_/alpine). Alpine Linux is much smaller than most distribution base images (~5MB), and thus leads to much slimmer images in general.
 
