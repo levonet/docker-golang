@@ -14,8 +14,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    # - name: Build the Docker buster image
-    #   run: docker build -f buster/Dockerfile -t levonet/golang:$(date +%s)-buster .
     - name: Build the Docker alpine image
-      run: ls -lR
-      # run: docker build -f alpine/Dockerfile -t levonet/golang:$(date +%s)-alpin .
+      run: docker build -f alpine/Dockerfile -t levonet/golang:$(date +%s)-alpin .
+    - name: Build the Docker buster image
+      run: docker build -f buster/Dockerfile -t levonet/golang:$(date +%s)-buster .
