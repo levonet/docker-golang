@@ -1,0 +1,20 @@
+#!/bin/bash
+
+echo "---------------------------------------------------------------- build begin ---"
+
+docker build \
+    -f "${DOCKERFILE_PATH}" \
+    -t "${IMAGE_NAME}" \
+    .
+
+for tag in $(echo $DOCKER_TAG | tr "," "\n"); do
+    echo "Test ${tag}"
+    if [ "${tag}" != "${tag/go2go/}" ]; then
+        tag_date=$(date +%Y%m%d)
+        new_image_name="${DOCKER_REPO}:${tag/go2go/go2go-$tag_date}"
+        echo docker tag "${IMAGE_NAME}" "${new_image_name}"
+        echo docker push "${new_image_name}"
+    fi
+done
+
+echo "------------------------------------------------------------------ build end ---"
