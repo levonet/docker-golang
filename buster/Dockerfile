@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:experimental
 FROM debian:buster-slim AS build
 
 ENV GOLANG_VERSION dev.go2go
@@ -74,10 +75,11 @@ ENV GO2PATH "${GOROOT}/src/cmd/go2go/testdata/go2path"
 
 COPY --from=build /usr/local/lib/go /usr/local/lib/go
 
-RUN set -eux \
+RUN --mount=type=tmpfs,target=/tmp \
+    --mount=type=tmpfs,target=/var/lib/apt \
+    set -eux \
     && apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
-    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p "${GOPATH}/src" "${GOPATH}/bin" \
     && chmod -R 777 "${GOPATH}" \
     && ln -s /usr/local/lib/go/bin/go /usr/bin/ \
